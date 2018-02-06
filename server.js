@@ -9,18 +9,19 @@ const express = require('express');
 const cookieParser = require('cookie-parser');
 const session = require('express-session');
 const passport = require('passport');
-const renderFile = require('ejs').renderFile
+const renderFile = require('ejs').renderFile;
+const logger = require('morgan');
 
 // Load Configuration
-const appMiddleWare = require('./config/middleware.js')
-const appSecrets = require('./config/secrets.js')
-const appAuthentication = require('./config/auth.js')
-const connectToDB = require('./config/db-setup.js').connectToDB
+const appMiddleWare = require('./config/middleware.js');
+const appSecrets = require('./config/secrets.js');
+const appAuthentication = require('./config/auth.js');
+const connectToDB = require('./config/db-setup.js').connectToDB;
 
 // Import Routers
-let indexRouter = require('./routes/indexRouter.js')
-let authRouter = require('./routes/authRouter.js')
-let apiRouter = require('./routes/apiRouter.js')
+let indexRouter = require('./routes/indexRouter.js');
+let authRouter = require('./routes/authRouter.js');
+let apiRouter = require('./routes/apiRouter.js');
 
 // Load DB User Model (for appAuthentication configuration)
 let User = require('./db/schema.js').User
@@ -48,6 +49,7 @@ connectToDB(PROJECT_NAME)
 // =========
 // APPLICATION MIDDLEWARE 
 // =========
+app.use(logger('dev'));
 app.use( express.static( __dirname + '/dist/assets') );
 app.use( bodyParser.json() );
 app.use( bodyParser.urlencoded() );

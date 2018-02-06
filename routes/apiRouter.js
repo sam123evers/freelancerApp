@@ -4,8 +4,6 @@ let helpers = require('../config/helpers.js');
 
 const Freelancer = require('../db/schema.js').Freelancer;
 
-
-
   
   apiRouter
     .post('/register', function(req, res) {
@@ -23,6 +21,27 @@ const Freelancer = require('../db/schema.js').Freelancer;
         res.json(freelancerList)
       })
     })
+
+    .get('/freelancers/:skills', (req, res) => {
+        var skills = req.params.skills
+    })
+
+    .delete('/freelancers/:id', function(req, res) {
+      console.log('delete route reached')
+      console.log(req.params.id)
+      Freelancer.remove({_id: req.params.id}, (err) => {
+        if(err) return res.json(err)
+          res.json({
+            msg: "freelancer deleted by ID",
+            _id: req.params.id
+          })
+      }) 
+    })
+      
+      
+    
+      
+      
 
     .post('/customer', (req, res) => {
       
