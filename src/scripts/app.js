@@ -12,7 +12,7 @@ import Home from './views/home'
 import Freelancers from './views/freelancers'
 import Customers from './views/customers'
 import FreelancerList from './views/freelancerList'
-import ProjectSubmit from './views/postProject'
+import ProjectSubmit from './views/projectSubmit'
 
 //Render the app in the div element with the ID of 'root'
 const app = () => {
@@ -27,7 +27,7 @@ class Main extends React.Component {
 		return (
 			<HashRouter>
 				<div className="main">
-					<h1>Microconsulting App</h1>
+					<h1>MicroConsulting App</h1>
 					<ul>
 						<li><NavLink to="/home">Home</NavLink></li>
 						<li><NavLink to="/freelancers">Freelancer Registration</NavLink></li>

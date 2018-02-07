@@ -12,14 +12,14 @@ class FreelancerList extends React.Component {
 		return (
 	      	<ul>
 	      		{this.props.freelancers.map((freelancer) => 
-	      				<li key={freelancer._id}>{freelancer.name}</li>
-	      			) 
-	      		
+      				<li key={freelancer._id}>{freelancer.name}</li>
+      				) 
 	      		}
 	      	</ul>
         );
     }
 }
+	      		
 
 	
 	

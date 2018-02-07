@@ -2,50 +2,66 @@ let Router = require('express').Router;
 const apiRouter = Router();
 let helpers = require('../config/helpers.js');
 
-const Freelancer = require('../db/schema.js').Freelancer;
+var Freelancer = require('../db/schema.js').Freelancer;
+var Project = require('../db/schema.js').Project;
 
   
   apiRouter
     .post('/register', function(req, res) {
-        var fl = new Freelancer(req.body);
-        fl.save().then(() => {
-          console.log('new freelancer saved to database')
-        })
-        .catch(err => {
-          res.status(400).send("unable to save to database");
-        });
+      var fl = new Freelancer(req.body);
+      fl.save().then(() => {
+        console.log('new freelancer saved to database')
+      })
+      .catch(err => {
+        res.status(400).send("unable to save to database");
+      });
     })
 
     .get('/freelancers', function(req, res) {
       Freelancer.find().then((freelancerList) => {
         res.json(freelancerList)
-      })
+      });
     })
 
     .get('/freelancers/:skills', (req, res) => {
-        var skills = req.params.skills
+      var skillsArray = req.params.skills;
+      console.log(skillsArray)
+      Freelancer.find({ skills: skillsArray }).then((freelancersBySkill) => {
+        res.json(freelancersBySkill)
+      })
     })
 
     .delete('/freelancers/:id', function(req, res) {
-      console.log('delete route reached')
-      console.log(req.params.id)
       Freelancer.remove({_id: req.params.id}, (err) => {
         if(err) return res.json(err)
-          res.json({
-            msg: "freelancer deleted by ID",
-            _id: req.params.id
-          })
-      }) 
+        res.json({
+          msg: "freelancer deleted by ID",
+          _id: req.params.id
+        });
+      });
     })
       
       
+    .post('/projects', (req, res) => {
+      var p = new Project(req.body);
+      p.save().then(() => {
+        console.log('saved project to DB');
+      })
+      .catch(err => {
+        res.status(400).send("project not saved due to an error")
+      });
+    })
+
+    .get('/projects', (req, res) => {
+      Project.find().then((projectList) => {
+        console.log(projectList)
+        res.json(projectList)
+      });
+    })
     
       
       
 
-    .post('/customer', (req, res) => {
-      
-    })
    
 
 //   apiRouter

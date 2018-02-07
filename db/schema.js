@@ -16,6 +16,13 @@ const freelancerSchema = new mongoose.Schema({
   contacts: { type: Array }
 })
 
+const projectSchema = new mongoose.Schema({
+  name: { type: String },
+  owner: { type: String },
+  milestones: { type: Array }
+})
+
 module.exports = {
-  Freelancer: mongoose.model('Freelancer', freelancerSchema)
+  Freelancer: mongoose.model('Freelancer', freelancerSchema),
+  Project: mongoose.model('Project', projectSchema)
 }

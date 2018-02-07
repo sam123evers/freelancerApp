@@ -5,7 +5,7 @@ class Home extends React.Component {
 		return (
 			<div className="home">
 				<h1>Home Page</h1>
-				<p>Here is a bunch of really useful content</p>
+				<p>Welcome to the CoderBunker MicroConsulting app</p>
 			</div>
 		)
 	}
